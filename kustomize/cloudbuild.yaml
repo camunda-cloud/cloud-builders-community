@@ -1,6 +1,14 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/kustomize', '.']
+  dir: kustomize
+  args:
+    - build
+    - --build-arg=VER
+    - --tag=gcr.io/$PROJECT_ID/kustomize
+    - .
+  env:
+    - VER=2.1.0
+
 - # Verify kustomize has been built correctly
   name: 'gcr.io/$PROJECT_ID/kustomize'
   entrypoint: 'kustomize'
