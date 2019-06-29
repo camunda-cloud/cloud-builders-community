@@ -3,16 +3,21 @@ steps:
   dir: kustomize
   args:
     - build
-    - --build-arg=VER
+    - --build-arg
+    - VER=${_KUSTOMIZE_VERSION}
     - --tag=gcr.io/$PROJECT_ID/kustomize
+    - --tag=gcr.io/$PROJECT_ID/kustomize:${_KUSTOMIZE_VERSION}
     - .
-  env:
-    - VER=2.1.0
-
 - # Verify kustomize has been built correctly
   name: 'gcr.io/$PROJECT_ID/kustomize'
   entrypoint: 'kustomize'
   args: ['version']
 
-images: ['gcr.io/$PROJECT_ID/kustomize']
+images:
+  - gcr.io/$PROJECT_ID/kustomize:latest
+  - gcr.io/$PROJECT_ID/kustomize:${_KUSTOMIZE_VERSION}
+
+substitutions:
+  _KUSTOMIZE_VERSION: 3.1.0
+
 tags: ['cloud-builders-community']
