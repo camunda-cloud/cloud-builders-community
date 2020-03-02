@@ -18,6 +18,6 @@ images:
   - gcr.io/$PROJECT_ID/kustomize:${_KUSTOMIZE_VERSION}
 
 substitutions:
-  _KUSTOMIZE_VERSION: 3.1.0
+  _KUSTOMIZE_VERSION: 3.4.0
 
 tags: ['cloud-builders-community']
