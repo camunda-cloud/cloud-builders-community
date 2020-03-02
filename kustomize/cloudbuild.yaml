@@ -20,4 +20,6 @@ images:
 substitutions:
   _KUSTOMIZE_VERSION: 3.4.0
 
-tags: ['cloud-builders-community']
+tags:
+  - cloud-builders-community
+  - kustomize
