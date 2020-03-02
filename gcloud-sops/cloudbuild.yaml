@@ -1,7 +1,25 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '--tag=gcr.io/$PROJECT_ID/gcloud-sops', '.']
-- # Verify sops has been built correctly
-  name: 'gcr.io/$PROJECT_ID/gcloud-sops'
+  dir: gcloud-sops
+  args:
+    - build
+    - --build-arg
+    - VER=${_SOPS_VERSION}
+    - --tag=gcr.io/$PROJECT_ID/gcloud-sops
+    - --tag=gcr.io/$PROJECT_ID/gcloud-sops:${_SOPS_VERSION}
+    - .
+
+# Verify sops has been built correctly
+- name: 'gcr.io/$PROJECT_ID/gcloud-sops'
   args: ['-v']
-images: ['gcr.io/$PROJECT_ID/gcloud-sops']
+
+images:
+  - gcr.io/$PROJECT_ID/gcloud-sops:latest
+  - gcr.io/$PROJECT_ID/gcloud-sops:${_SOPS_VERSION}
+
+substitutions:
+  _SOPS_VERSION: 3.5.0
+
+tags:
+  - cloud-builders-community
+  - sops
