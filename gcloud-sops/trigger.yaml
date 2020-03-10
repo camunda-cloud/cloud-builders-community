@@ -1,0 +1,10 @@
+description: 'gcloud-sops: Push to ^master$ branch'
+filename: gcloud-sops/cloudbuild.yaml
+github:
+  name: cloud-builders-community
+  owner: camunda-cloud
+  push:
+    branch: ^master$
+includedFiles:
+- gcloud-sops/*
+name: gcloud-sops
